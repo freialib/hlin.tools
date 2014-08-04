@@ -52,9 +52,9 @@ class Console {
 	 * ...
 	 */
 	protected function printException(\Exception $e) {
-		$syspath = $this->context->path('syspath');
+		$rootpath = $this->context->path('rootpath');
 		$trace = str_replace("\n", "\n   ", "\n".$e->getTraceAsString());
-		$trace = str_replace($syspath, 'sys.path:', $trace);
+		$trace = str_replace($rootpath, 'rootpath:', $trace);
 		$this->cli->printf_error("\n  %s\n%s\n", $e->getMessage(), $trace);
 	}
 
