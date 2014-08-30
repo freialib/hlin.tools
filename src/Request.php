@@ -32,6 +32,7 @@ class Request implements \hlin\tools\RequestSignature {
 	 *  - post
 	 *  - json
 	 *  - query (alias: get)
+	 *  - files
 	 *
 	 * Supported output formats:
 	 *  - array
@@ -63,6 +64,15 @@ class Request implements \hlin\tools\RequestSignature {
 			if ( ! empty($get)) {
 				if ($output == 'array') {
 					return $get;
+				}
+			}
+		}
+
+		if (in_array('files', $formats)) {
+			$files = $this->context->web->requestFiles();
+			if ( ! empty($files)) {
+				if ($output == 'array') {
+					return $files;
 				}
 			}
 		}
