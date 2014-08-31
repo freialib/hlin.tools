@@ -53,14 +53,14 @@ class FileLogger implements \hlin\archetype\Logger {
 	 *
 	 * Types should not use illegal file characters.
 	 */
-	function log($message, $type = null) {
+	function log($message, $type = null, $explicit = false) {
 		try {
 			$time = date('Y-m-d|H:i:s');
 			if ($type === null) {
-				$this->appendToFile(date('Y/m/d'), "[$time] $message");
+				$this->appendToFile(date('Y/m/d'), "[$time] $message", $explicit);
 			}
 			else { // type !== null
-				$this->appendToFile($type, "[$time] $message");
+				$this->appendToFile($type, "[$time] $message", $explicit);
 			}
 		}
 		catch (\Exception $e) {
@@ -86,7 +86,7 @@ class FileLogger implements \hlin\archetype\Logger {
 	 * extention is automatically appended, along with a single
 	 * newline character.
 	 */
-	protected function appendToFile($logfile, $logstring) {
+	protected function appendToFile($logfile, $logstring, $explicit = false) {
 
 		$class = \hlin\PHP::unn(__CLASS__);
 
@@ -132,7 +132,7 @@ class FileLogger implements \hlin\archetype\Logger {
 			$this->filesigs[] = $filesig;
 
 			// have we stored the summary report?
-			if ( ! in_array($sig, $this->sigs)) {
+			if ( ! $explicit && ! in_array($sig, $this->sigs)) {
 
 				$filepath = $this->logspath.'/summary.log';
 
@@ -163,7 +163,7 @@ class FileLogger implements \hlin\archetype\Logger {
 	 *
 	 * @return int
 	 */
-	function dirPermission() {
+	protected function dirPermission() {
 		return 0775;
 	}
 
@@ -172,7 +172,7 @@ class FileLogger implements \hlin\archetype\Logger {
 	 *
 	 * @return int
 	 */
-	function filePermission() {
+	protected function filePermission() {
 		return 0664;
 	}
 
