@@ -62,7 +62,7 @@ class CmdhelpCommand implements \hlin\archetype\Command {
 			if ($console_help !== false) {
 				$this->cli->printf("\n");
 				$this->delimiter();
-				$this->cli->printf(rtrim($console_help, "\n\r "));
+				$this->cli->printf("\n".rtrim($console_help, "\n\r "));
 				$this->cli->printf("\n\n");
 			}
 
@@ -85,7 +85,7 @@ class CmdhelpCommand implements \hlin\archetype\Command {
 	protected function printp($input, $indent = 0) {
 		$input = trim($input, "\n\t\r ");
 		$indentation = str_repeat(' ', $indent);
-		$this->cli->printf($indentation.wordwrap(str_replace("\n", "\n$indentation", $input), 75 - $indent, "\n$indentation")."\n\n");
+		$this->cli->printf($indentation.wordwrap(str_replace("\n", "\n$indentation", $input), 75 - $indent, "\n$indentation")."\n");
 	}
 
 	/**
