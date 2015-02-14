@@ -32,6 +32,7 @@ class Request implements \hlin\tools\RequestSignature {
 	 *  - post
 	 *  - json
 	 *  - query (alias: get)
+	 *  - raw-query
 	 *  - files
 	 *
 	 * Supported output formats:
@@ -65,6 +66,13 @@ class Request implements \hlin\tools\RequestSignature {
 				if ($output == 'array') {
 					return $get;
 				}
+			}
+		}
+
+		if (in_array('raw-query', $formats)) {
+			$rawquery = $this->context->web->requestRawQueryData();
+			if ( ! empty($rawquery)) {
+				return $rawquery;
 			}
 		}
 
