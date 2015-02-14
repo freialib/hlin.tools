@@ -71,6 +71,24 @@ class Response implements \hlin\tools\ResponseSignature {
 
 		// redirect to...
 		$this->header("Location: $url");
-	}	
+	}
+
+	/**
+	 * Terminates request at point.
+	 * Is intended as abstraction for testing.
+	 */
+	function end() {
+		exit(0);
+	}
+
+	/**
+	 * Only relevant in testing since while not emulated by mocks end function
+	 * will terminate via exit.
+	 *
+	 * @return boolean false
+	 */
+	function hasEnded() {
+		return false;
+	}
 
 } # class

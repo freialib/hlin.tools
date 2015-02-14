@@ -32,6 +32,19 @@ interface ResponseSignature extends \hlin\attribute\Contextual {
 	 */
 	function redirect($url, $type = 303);
 
+	/**
+	 * Terminates request at point.
+	 * Is intended as abstraction for testing.
+	 */
+	function end();
+
+	/**
+	 * Is intended as abstraction for testing.
+	 *
+	 * @return boolean false
+	 */
+	function hasEnded();
+
 // ---- Response Logic --------------------------------------------------------
 
 	/**
