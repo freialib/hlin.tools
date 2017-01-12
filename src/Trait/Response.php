@@ -41,7 +41,13 @@ trait ResponseTrait {
 	 * @return static $this
 	 */
 	function conf($conf) {
-		$this->conf = $conf;
+		if ($this->conf == null) {
+			$this->conf = $conf;
+		}
+		else { // already configured, update
+			$this->conf = array_merge($this->conf, $conf);
+		}
+
 		return $this;
 	}
 
